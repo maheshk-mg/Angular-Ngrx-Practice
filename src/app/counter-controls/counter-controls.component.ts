@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { increment } from '../store/counter.actions';
+import { decrement, increment, reset } from '../store/counter.actions';
 
 @Component({
   selector: 'app-counter-controls',
@@ -14,13 +14,13 @@ export class CounterControlsComponent implements OnInit {
   ngOnInit() {}
 
   increment() {
-    this.store.dispatch(increment());
+    this.store.dispatch(increment({ countValue: 10 }));
   }
 
   decrement() {
-    // this.store.dispatch(decrement());
+    this.store.dispatch(decrement({ decrementCount: 5 }));
   }
   reset() {
-    // this.store.dispatch(reset());
+    this.store.dispatch(reset());
   }
 }

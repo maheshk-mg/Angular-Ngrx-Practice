@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { selectCount, selectDoubleCount } from '../store/counter.selectors';
 
 @Component({
   selector: 'app-counter-output',
@@ -10,12 +11,15 @@ import { Observable } from 'rxjs';
 })
 export class CounterOutputComponent implements OnInit, OnDestroy {
   count$!: Observable<number>;
+  doubleCount$!: Observable<number>;
 
   constructor(private store: Store<{ counter: number }>) {
-    this.count$ = store.select(state => state.counter);
+  
   }
 
   ngOnInit(): void {
+    this.count$ = this.store.select(selectCount);
+    this.doubleCount$ = this.store.select(selectDoubleCount);
     console.log('CounterOutputComponent ngOnInit called');
   }
 

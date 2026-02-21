@@ -1,10 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
-import { increment } from './counter.actions';
+import { decrement, increment, reset } from './counter.actions';
 
 const initialState = 0;
 
 export const counterReducer = createReducer(
     initialState,
-    on(increment, (state) => state + 1)
+    on(increment, (state, action) => state + action.countValue), // Use default value of 1 if countValue is missing
+    on(decrement, (state, action) => {
+        if (state === 0) {
+            alert('Counter cannot go below zero');
+            return state;
+        }
+        return state - action.decrementCount;
+    }),
+    on(reset, (state) => 0)
 );
 
