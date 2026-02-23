@@ -13,9 +13,7 @@ export class CounterOutputComponent implements OnInit, OnDestroy {
   count$!: Observable<number>;
   doubleCount$!: Observable<number>;
 
-  constructor(private store: Store<{ counter: number }>) {
-  
-  }
+  constructor(private store: Store<{ counter: number }>) {}
 
   ngOnInit(): void {
     this.count$ = this.store.select(selectCount);
